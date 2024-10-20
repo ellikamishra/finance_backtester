@@ -85,6 +85,7 @@ WSGI_APPLICATION = 'financial_backtester.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
+print("DATABASE_URL:", os.environ.get('DATABASE_URL'))
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
