@@ -1,0 +1,32 @@
+<!-- financial_data/templates/financial_data/report.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Report for {{ symbol }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+        h1, h2 { color: #333; }
+        .chart { max-width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+    <h1>Financial Report for {{ symbol }}</h1>
+    
+    <h2>Backtesting Results</h2>
+    <p>Total Return: {{ backtest_result.total_return }}%</p>
+    <p>Final Value: ${{ backtest_result.final_value }}</p>
+    <p>Number of Trades: {{ backtest_result.trades }}</p>
+    
+    <h2>Stock Price Chart</h2>
+    <img src="data:image/png;base64,{{ plot }}" alt="Stock Price Chart" class="chart">
+    
+    <h2>Price Predictions for Next 30 Days</h2>
+    <ol>
+        {% for prediction in predictions %}
+            <li>${{ prediction|floatformat:2 }}</li>
+        {% endfor %}
+    </ol>
+</body>
+</html>
