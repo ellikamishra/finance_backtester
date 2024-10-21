@@ -45,9 +45,10 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=dbname
+      - POSTGRES_USER=ellika
+      - POSTGRES_PASSWORD=lmnop98
+      - POSTGRES_DB=database-1
+
 
 volumes:
   postgres_data:
