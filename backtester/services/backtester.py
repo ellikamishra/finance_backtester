@@ -5,6 +5,7 @@ def calculate_moving_average(data, window):
     return data['close_price'].astype(float).rolling(window=window).mean()
     #return data['close_price'].rolling(window=window).mean()
 
+#developed backtesting strategy by using exisitng data objects
 def backtest_strategy(symbol, initial_investment, buy_ma, sell_ma):
     data = StockData.objects.filter(symbol=symbol).order_by('date')
     df = pd.DataFrame(list(data.values()))

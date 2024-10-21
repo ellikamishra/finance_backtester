@@ -5,6 +5,7 @@ from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
+import pdfkit
 
 from .services.data_fetcher import fetch_stock_data
 from .models import StockData
@@ -57,13 +58,18 @@ class FetchStockDataView(APIView):
         
         report = generate_report(symbol, initial_investment, buy_ma, sell_ma)
         html = render(request, 'report.html', report).content.decode('utf-8')
+
+    # Create a temporary file to save the PDF
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as pdf_file:
+            pdf_file_path = pdf_file.name
+
+    # Convert HTML to PDF and save it to the temp file
+        pdfkit.from_string(html, pdf_file_path)
+
+    # Return a JSON response with the PDF file path
+        response_data = {
+            "message": "PDF report generated successfully",
+            "pdf_file_path": pdf_file_path
+        }
     
-    # Save the HTML to a temporary file
-        with tempfile.NamedTemporaryFile('w', delete=False, suffix='.html') as f:
-            url = 'file://' + f.name
-            f.write(html)
-    
-    # Open the HTML file in the default web browser
-        webbrowser.open(url)
-    
-        return HttpResponse("Report opened in your default web browser.")
+        return JsonResponse(response_data)
