@@ -29,8 +29,5 @@ This Django-based project fetches financial data from Alpha Vantage, stores it i
 
 8. Test the endpoints using curl, like "curl -X POST -H "Content-Type: application/json" -d '{"symbol":"AAPL"}' http://127.0.0.1:8000/api/fetch-stock-data/" for local testing. Uncomment the settings.py to use local database and also do not forget to add your corresponding credentials in the settings after setting a postgres database.
 
-9. To deploy the project on AWS or any similar platform follow the below mentioned steps:
 
-   a. Create a AWS RDS instance for post-gres sql.
-   b. Create an elastic-beanstalk application and attach it to an environment with parameters. Attach a launch template to the environment.
-   c. Setup the github CI/CD by creating a .github/workflow and adding deploy.yml with corresponding credentials.
+
